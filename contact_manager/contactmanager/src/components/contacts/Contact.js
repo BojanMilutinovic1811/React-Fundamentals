@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Consumer} from '../Context';
+import {Consumer} from '../../Context';
 
 class Contact extends Component {
   state = {
@@ -8,7 +8,7 @@ class Contact extends Component {
   }
   
   onDeleteClick = (id, dispatch) => {
-    console.log('hello  ')
+    
     dispatch({type:'DELETE_CONTACT', payload: id})  
   }
 
