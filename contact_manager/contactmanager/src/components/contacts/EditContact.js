@@ -3,13 +3,24 @@ import {Consumer} from '../../Context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
 
-class AddContact extends Component {
+class EditContact extends Component {
 
     state = {
         name: '',
         email: '',
         phone: '',
         errors: {}
+    }
+
+    async componentDidMount() {
+        const {id} = this.props.match.params;
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        const {name, email, phone} = res.data;
+        console.log(res.data)
+        this.setState({
+            name: name,
+            email: email,
+            phone: phone})
     }
 
     onChange = e => {
@@ -33,15 +44,17 @@ class AddContact extends Component {
             return
         }
 
-        const newContact = {
+        const updateContact = {
             name,
             email,
             phone
         }
 
-        const res = await axios.post('https://jsonplaceholder.typicode.com/users', newContact)
-        dispatch({type:'ADD_CONTACT', payload: res.data})
-        
+        const {id} = this.props.match.params;
+
+        const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updateContact);
+
+        dispatch({type:'UPDATE_CONTACT', payload: res.data})
 
         this.setState({
             name: '',
@@ -61,7 +74,7 @@ class AddContact extends Component {
                 const {dispatch} = value;
                 return(
                     <div className='card mb-3'>
-        <div className='card-header'>Add Contact</div>
+        <div className='card-header'>Edit Contact</div>
         <div className='card-body'>
             <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                 <TextInputGroup 
@@ -93,7 +106,7 @@ class AddContact extends Component {
                     <div className='col-md-4'>
                     </div>
                     <div className='col-md-4'>
-                <input type='submit' value='Add Contact' className='btn btn-block btn-success'></input>
+                <input type='submit' value='Update Contact' className='btn btn-block btn-success'></input>
                 </div>
                 </div>
             </form>
@@ -108,4 +121,4 @@ class AddContact extends Component {
 }
 
 
-export default AddContact; 
+export default EditContact; 
