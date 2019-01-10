@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+#main {
+    background: greenyellow;
+    height: 100%;
+    flex-grow: 2;
+}
