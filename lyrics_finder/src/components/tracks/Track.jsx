@@ -21,7 +21,7 @@ export default function Track(props) {
           </p>
           <Link
             to={`lyrics/track/${track.track_id}`}
-            className="btn btn-dark btn-block"
+            className="btn btn-dark"
           >
             <i className="fas fa-chevron-right" /> View Lyrics
           </Link>
