@@ -10,7 +10,6 @@ export default class Tracks extends Component {
     <Consumer>
       {value => {
         const {track_list, heading} = value
-        console.log(track_list)
 
         if(track_list === undefined || track_list.length === 0) {
           return <Spinner />

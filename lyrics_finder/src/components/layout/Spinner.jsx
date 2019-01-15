@@ -3,19 +3,22 @@ import spinner from './spinner2.gif'
 
 export default  function Spinner() {
   return (
-    <React.Fragment>
-        <img src={spinner} alt="loading..." style={spinnerStyle}/>
+    <div style={spinnerStyle}>
+        <img src={spinner} alt="loading..." style={imageStyle}/>
+        <p>Loading...</p>
       
-    </React.Fragment>
+    </div>
   )
 }
 
 const spinnerStyle = {
-    width: '100px',
-    margin: '40px auto',
-    display: 'block',
-    position: 'absolute',
-    left: '50%',
-    top: '40%',
-    transform: 'translate(-50%, -50%)'
+   display: 'flex',
+   flexDirection: 'column',
+   justifyContent: 'center',
+   alignItems: 'center',
+   marginTop: '30px'
+}
+
+const imageStyle = {
+    width: '100px'
 }

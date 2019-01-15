@@ -7,7 +7,9 @@ export default function Main() {
     <div className="row">
       <Search />
     </div>
+    <div style={{position:'relative'}}>
       <Tracks />
+      </div>
     </div>
   )
 }
