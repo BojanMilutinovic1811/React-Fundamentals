@@ -1,54 +1,65 @@
 const appRoot = document.getElementById('root');
 
-const app = {
-    title: 'Indecision App',
-    subtitle: 'Put your life in the hands of the computer',
-    options: []
-}
 
-const addOption = (e) => {
-    e.preventDefault()
-    let option = e.target.elements.option.value;
-    if(option) {
-        app.options.push(option)
-        renderTemplate()
-        e.target.elements.option.value = ''
-    } else {
-        console.log('please insert an option');
+class IndecisionApp extends React.Component {
+    render() {
+
+        const title = 'Indecision App';
+        const subtitle = 'Put your life in the hands of the computer';
+        const options = ['one', 'two', 'three'];
+
+        return(
+            <div>
+                <Header title={title} subtitle={subtitle}/>
+                <Action/>
+                <Options options={options}/>
+                <AddOption/>
+            </div>
+        )
     }
 }
 
-const removeAll = () => {
-    app.options.length = 0; 
-    renderTemplate()
-}
-
-const makeDecision = () => {
-    let option = Math.floor(Math.random() * app.options.length)
-    console.log(option);
-}
-
-const renderTemplate = () => {
-    const template = (
-        <div>
-         <h1>{app.title}</h1>
-        {app.subtitle && <p>{app.subtitle}</p>}
-        <h3>Here are your options</h3>
-            {(app.options.length > 0) 
-            ? <ul>{app.options.map(option => <li key='option'>{option}</li>)}</ul> 
-            : <p>no options</p>}
-        <button disabled={app.options.length === 0}onClick={makeDecision}>What should I do?</button>
-        <button onClick={removeAll}>Remove all</button>
-        <form onSubmit={addOption}>
-        <input type='text' name='option'></input>
-        <button>Add option</button>
-        </form>
+class Header extends React.Component {
+    render() {
+        return(
+            <div>
+            <h1>{this.props.title}</h1>
+            <p>{this.props.subtitle}</p>
         </div>
         )
-    
-        ReactDOM.render(template, appRoot)
+
+    }
 }
 
-renderTemplate()
+class Action extends React.Component {
+    render() {
+     return   <div>Action</div>
+    }
+}
+
+class Options extends React.Component {
+    render() {
+       return (
+           this.props.options.map(option => <Option key={option} text={option}/>)
+       )
+    }
+}
+
+class Option extends React.Component {
+    render() {
+        return(
+            <div>
+                <p>{this.props.text}</p>
+            </div>
+        )
+    }
+}
+
+class AddOption extends React.Component {
+    render() {
+     return   <div>add option</div>
+    }
+}
 
 
+ReactDOM.render(<IndecisionApp/>, appRoot)
